@@ -1,15 +1,14 @@
 import React from 'react';
 import '../../Styles/App.css';
 import NavBar from '../NavigationBar/NavBar';
-
+import { BrowserRouter /*, Route, Routes */  } from 'react-router-dom';
 
 class App extends React.Component{
   render(){
     return(
-      <main>
-        <h1>This is Apps</h1>
+      <BrowserRouter>        
         <NavBar />
-      </main>
+      </BrowserRouter>
     )
   }
 }
