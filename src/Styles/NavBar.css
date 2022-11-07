@@ -21,8 +21,7 @@
 
 .category-name ul > li{
     list-style-type: none;
-    font-family: 'Raleway', sans-serif;
-    
+    font-family: 'Raleway', sans-serif;    
     border: none;
     cursor: pointer;
     text-decoration: none;
@@ -33,7 +32,7 @@
 .category-name ul > a{
     color: #1D1F22;
     text-decoration: none;
-    border-bottom: 2px solid #5ECE7B;
+    /* border-bottom: 2px solid #5ECE7B; */
     height: 56px;
     font-style: normal;
     font-weight: 400;
@@ -44,24 +43,20 @@
     text-align: center;
     text-transform: uppercase;
 }
-.category-name ul > a:visited{
-    color: #1D1F22;
 
-}
-/*
-.category-name ul > a.active {
-    border-bottom: 3px solid #5ECE7B;
-    color: #5ECE7B;
+.activeClicked {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;    
+    height: 56px;
+    border-bottom: 2px solid #5ECE7B;    
     font-style: normal;
+    color: #5ECE7B;
     font-weight: 600;
     font-size: 16px;
     line-height: 120%;
     text-decoration: none;
 }
-
-.category-name ul > a::selection {
-    color: #5ECE7B;
-} */
 
 .cart{
     display: flex;
