@@ -6,6 +6,7 @@ import ArrowDown from '../../images/arrowDown.svg';
 import { NavLink } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import { CURRENCY_QUERY } from '../../graphQLQuery/cardQuery';
+import CurrencyChange from './currencyChange/CurrencyChange';
 
 class NavBar extends React.PureComponent {
     constructor(props) {
@@ -15,6 +16,7 @@ class NavBar extends React.PureComponent {
             isClothesActive: false,
             isTechActive: false,
             isArrowActive: false,
+            currencyChangeAppear: false,
         };
         this.navClicked = this.navClicked.bind(this);
         this.arrowClicked = this.arrowClicked.bind(this);
@@ -61,16 +63,28 @@ class NavBar extends React.PureComponent {
     arrowClicked = () => {
         const { isArrowActive } = this.state;
         !isArrowActive
-            ? this.setState({ isArrowActive: true })
-            : this.setState({ isArrowActive: false });
+            ? this.setState({
+                isArrowActive: true,
+                currencyChangeAppear: true
+            })
+            : this.setState({
+                isArrowActive: false,
+                currencyChangeAppear: false
+            });
     };
 
-    goBack = () => {
-        window.history.back();
-    };
+    // goBack = () => {
+    //     window.history.back();
+    // };
     render() {
-        const { isAllActive, isClothesActive, isTechActive, isArrowActive } =
-            this.state;
+        const {
+            isAllActive,
+            isClothesActive,
+            isTechActive,
+            isArrowActive,
+            currencyChangeAppear,
+        } = this.state;
+        const { currencyIndex, getCurrencyIndex } = this.props;
         return (
             <nav>
                 <div className="main-nav-container">
@@ -116,7 +130,8 @@ class NavBar extends React.PureComponent {
                     <div className="middle-logo">
                         <img
                             src={GreenBag}
-                            alt="green bag logo" /*onClick={this.goBack}*/
+                            alt="green bag logo"
+                            /*onClick={this.goBack}*/
                         />
                     </div>
                     <div className="actions">
@@ -129,7 +144,7 @@ class NavBar extends React.PureComponent {
 
                                 return (
                                     <p id="currency-symbol">
-                                        {data.currencies[1].symbol}
+                                        {data.currencies[currencyIndex].symbol}
                                     </p>
                                 );
                             }}
@@ -137,11 +152,7 @@ class NavBar extends React.PureComponent {
                         <img
                             src={ArrowDown}
                             alt="more currencies"
-                            id={
-                                isArrowActive
-                                    ? "arrow-up"
-                                    : "arrow-down"
-                            }
+                            id={isArrowActive ? 'arrow-up' : 'arrow-down'}
                             onClick={this.arrowClicked}
                         />
                         <img
@@ -152,6 +163,11 @@ class NavBar extends React.PureComponent {
                         />
                     </div>
                 </div>
+                {currencyChangeAppear && (
+                    <CurrencyChange
+                        getCurrencyIndex={getCurrencyIndex}
+                    />
+                )}
             </nav>
         );
     }
