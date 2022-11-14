@@ -1,0 +1,16 @@
+#category-title {
+    height: 68px;
+    width: 299px;
+    margin-left: 101px;
+    margin-top: 80px;
+    margin-bottom: 103px;
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 42px;
+    line-height: 160%;
+    display: flex;
+    align-items: center;
+    color: #1d1f22;
+    text-transform: capitalize;
+}
