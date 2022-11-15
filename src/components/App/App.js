@@ -2,6 +2,7 @@ import React from 'react';
 import '../../Styles/App.css';
 import NavBar from '../NavigationBar/NavBar';
 import CategoryName from '../Category/CategoryName/CategoryName';
+import All from '../Category/All/All';
 import Card from '../Card/Card';
 import { BrowserRouter /*, Route, Routes */ } from 'react-router-dom';
 
@@ -57,8 +58,11 @@ class App extends React.PureComponent {
                     currencyIndex={this.state.currencyIndex}
                     getCurrencyIndex={this.getCurrencyIndex}
                 />
-                <CategoryName />
-                <Card />
+                <All
+                    currencyIndex={this.state.currencyIndex}
+                    getCurrencyIndex={this.getCurrencyIndex}
+                />
+                {/* <Card /> */}
             </BrowserRouter>
         );
     }

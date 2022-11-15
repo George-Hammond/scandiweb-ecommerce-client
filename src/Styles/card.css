@@ -1,24 +1,25 @@
 .card-wrapper {
-    /* border: 1px solid red;
-    background-color:green; */
-    width: 342px;
-    height: 390px;
+    /* border: 1px solid red;     */
+    /* background-color:green; */
+    width: 386px;
+    height: 444px;
     margin-bottom: 103px;
     margin-right: 40px;
 }
 
 .category-cardWrapper {
-    margin-left: 101px;
+    margin-left: 100px;
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
     /* border: 1px solid red; */
-    width: 1147px;
+    width: 1280px;
 }
 
 .card-img-section {
-    /* border: 1px solid purple; */
-    height: 320px;
+    height: 330px;
+    width: 355px;
+    margin: 16px 16px 24px 16px;
 }
 
 /*#green-cart{
@@ -37,9 +38,6 @@
 }
 
 #in-stock {
-    /* position: absolute;
-    right: 25.71%;
-    bottom: 43.94%; */
     margin-left: 35.42%;
     margin-top: -65.24%;
     text-decoration: none;
@@ -48,7 +46,6 @@
     font-weight: 400;
     font-size: 24px;
     line-height: 160%;
-    /* identical to box height, or 38px */
     display: flex;
     text-align: center;
     color: #8d8f9a;
@@ -64,9 +61,8 @@
 
 #product-image {
     /* border: 1px solid blue; */
-    width: 310px;
-    height: 285px;
-    margin: 16px 16px 0px 16px;
+    width: 354px;
+    height: 330px;
 }
 
 .out > #product-image {
@@ -74,13 +70,16 @@
 }
 
 #product-name {
-    /* border: 1px solid blue; */
-    font-family: 'Raleway', sans-serif;
-    font-size: 18px;
+    width: 354px;
+    height: 29px;
+    font-family: 'Raleway';
+    font-style: normal;
     font-weight: 300;
-    line-height: 29px;
-    letter-spacing: 0px;
-    text-align: left;
+    font-size: 18px;
+    line-height: 160%;
+    display: flex;
+    align-items: center;
+    color: #1d1f22;
     margin: 0px 16px 0px 16px;
 }
 
@@ -89,14 +88,30 @@
 }
 #product-price {
     margin-left: 16px;
-    font-family: 'Raleway', sans-serif;
-    font-size: 18px;
+    width: 58px;
+    height: 29px;
+    font-family: 'Raleway';
+    font-style: normal;
     font-weight: 500;
-    line-height: 29px;
-    letter-spacing: 0em;
-    text-align: left;
+    font-size: 18px;
+    line-height: 160%;
+    text-align: right;
+    color: #1d1f22;
 }
 
 .out > #product-price {
     color: #8d8f9a;
+}
+
+/* out of stock(oos) overlay */
+#oos-overlay {
+    position: absolute;
+    transition: 0.5s ease;
+    margin-top: -193px;
+    background-color: #fff;
+    margin-left: 16px;
+    opacity: 0.5;
+    height: 412px;
+    width: 354px;
+    z-index: 1;
 }
