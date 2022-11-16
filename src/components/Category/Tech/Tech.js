@@ -1,15 +1,15 @@
 import React from 'react';
-import CategoryName from '../CategoryName/CategoryName';
-import { Query } from 'react-apollo';
 import Card from '../../Card/Card';
+import CategoryName from '../CategoryName/CategoryName';
 import { ENTRYPOINT_CATEGORY } from '../../../graphQLQuery/cardQuery';
+import { Query } from 'react-apollo';
 
 const bigTitle = {
-    title: 'all',
+    title: 'tech',
 };
 
-export default class All extends React.PureComponent {
-    renderCategoryName() {        
+class Tech extends React.PureComponent {
+    renderCategoryName() {
         return (
             <Query query={ENTRYPOINT_CATEGORY} variables={{ input: bigTitle }}>
                 {({ loading, error, data }) => {
@@ -56,10 +56,12 @@ export default class All extends React.PureComponent {
     }
     render() {
         return (
-            <div className="appear disappear">
+            <>
                 {this.renderCategoryName()}
                 {this.renderCard()}
-            </div>
+            </>
         );
     }
 }
+
+export default Tech;

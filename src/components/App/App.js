@@ -3,8 +3,9 @@ import '../../Styles/App.css';
 import NavBar from '../NavigationBar/NavBar';
 import CategoryName from '../Category/CategoryName/CategoryName';
 import All from '../Category/All/All';
-import Card from '../Card/Card';
-import { BrowserRouter /*, Route, Routes */ } from 'react-router-dom';
+import { BrowserRouter , Route, Routes  } from 'react-router-dom';
+import Clothes from '../Category/Clothes/Clothes';
+import Tech from '../Category/Tech/Tech';
 
 class App extends React.PureComponent {
     constructor(props) {
@@ -58,11 +59,76 @@ class App extends React.PureComponent {
                     currencyIndex={this.state.currencyIndex}
                     getCurrencyIndex={this.getCurrencyIndex}
                 />
-                <All
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <All
+                                getCardId={this.getCardId}
+                                addToCart={this.addToCart}
+                                currencyIndex={this.state.currencyIndex}
+                            />
+                        }
+                    />
+
+                    <Route
+                        path="/clothes"
+                        element={
+                            <Clothes
+                                getCardId={this.getCardId}
+                                addToCart={this.addToCart}
+                                currencyIndex={this.state.currencyIndex}
+                            />
+                        }
+                    />
+
+                    <Route
+                        path="/tech"
+                        element={
+                            <Tech
+                                getCardId={this.getCardId}
+                                addToCart={this.addToCart}
+                                currencyIndex={this.state.currencyIndex}
+                            />
+                        }
+                    />
+
+                    {/* <Route
+                        path="/cart"
+                        element={
+                            <Cart
+                                cartItems={this.state.cartItems}
+                                currencyIndex={this.state.currencyIndex}
+                                sumProductPrice={this.state.sumProductPrice}
+                                tax={this.state.tax}
+                                productItemAmount={this.state.productItemAmount}
+                            />
+                        }
+                    />
+
+                    <Route
+                        path="/product/:productId"
+                        element={
+                            <ProductPage
+                                id={this.state.id}
+                                addToCart={this.addToCart}
+                                currencyIndex={this.state.currencyIndex}
+                            />
+                        }
+                    /> */}
+                </Routes>
+                {/* <All
                     currencyIndex={this.state.currencyIndex}
                     getCurrencyIndex={this.getCurrencyIndex}
-                />
-                {/* <Card /> */}
+                /> */}
+                {/* <Clothes
+                    currencyIndex={this.state.currencyIndex}
+                    getCurrencyIndex={this.getCurrencyIndex}
+                /> */}
+                {/* <Tech
+                    currencyIndex={this.state.currencyIndex}
+                    getCurrencyIndex={this.getCurrencyIndex}
+                /> */}
             </BrowserRouter>
         );
     }

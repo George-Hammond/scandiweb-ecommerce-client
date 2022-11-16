@@ -1,20 +1,20 @@
 import React from 'react';
-import CategoryName from '../CategoryName/CategoryName';
-import { Query } from 'react-apollo';
 import Card from '../../Card/Card';
+import CategoryName from '../CategoryName/CategoryName';
 import { ENTRYPOINT_CATEGORY } from '../../../graphQLQuery/cardQuery';
+import { Query } from 'react-apollo';
 
 const bigTitle = {
-    title: 'all',
+    title: 'clothes',
 };
 
-export default class All extends React.PureComponent {
-    renderCategoryName() {        
+class Clothes extends React.PureComponent {
+    renderCategoryName() {
         return (
             <Query query={ENTRYPOINT_CATEGORY} variables={{ input: bigTitle }}>
                 {({ loading, error, data }) => {
                     if (loading) return <div></div>;
-                    if (error) return <div>Error: {error.message}</div>;
+                    if (error) return <div>Error... {error.message}</div>;
 
                     return <CategoryName categoryName={data} />;
                 }}
@@ -34,8 +34,8 @@ export default class All extends React.PureComponent {
                         if (loading) return <div>Loading...</div>;
 
                         if (error) return <div>Error: {error.message}</div>;
-
-                        return data.category.products.map((cardData) => (
+                        console.log(data.category.products);
+                        return data.category.products.map((cardData, index) => (
                             <Card
                                 key={cardData.id}
                                 cardData={cardData}
@@ -43,7 +43,9 @@ export default class All extends React.PureComponent {
                                 addToCart={() =>
                                     addToCart(
                                         cardData.id,
-                                        cardData.prices[currencyIndex].amount
+                                        data.category.products[index].prices[
+                                            currencyIndex
+                                        ].amount
                                     )
                                 }
                                 currencyIndex={currencyIndex}
@@ -56,10 +58,12 @@ export default class All extends React.PureComponent {
     }
     render() {
         return (
-            <div className="appear disappear">
+            <>
                 {this.renderCategoryName()}
                 {this.renderCard()}
-            </div>
+            </>
         );
     }
 }
+
+export default Clothes;

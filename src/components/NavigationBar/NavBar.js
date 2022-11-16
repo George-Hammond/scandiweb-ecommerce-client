@@ -64,109 +64,111 @@ class NavBar extends React.PureComponent {
         const { isArrowActive } = this.state;
         !isArrowActive
             ? this.setState({
-                isArrowActive: true,
-                currencyChangeAppear: true
-            })
+                  isArrowActive: true,
+                  currencyChangeAppear: true,
+              })
             : this.setState({
-                isArrowActive: false,
-                currencyChangeAppear: false
-            });
+                  isArrowActive: false,
+                  currencyChangeAppear: false,
+              });
     };
 
     // goBack = () => {
     //     window.history.back();
     // };
+    renderNavLinks() {
+        const { isAllActive, isClothesActive, isTechActive } = this.state;
+        return (
+            <ul>
+                <NavLink to="/" id="all" onClick={this.navClicked}>
+                    <span className={isAllActive ? 'activeClicked' : ''}>
+                        All
+                    </span>
+                </NavLink>
+                <NavLink to="clothes" id="clothes" onClick={this.navClicked}>
+                    <span className={isClothesActive ? 'activeClicked' : ''}>
+                        Clothes
+                    </span>
+                </NavLink>
+                <NavLink to="tech" id="tech" onClick={this.navClicked}>
+                    <span className={isTechActive ? 'activeClicked' : ''}>
+                        Tech
+                    </span>
+                </NavLink>
+            </ul>
+        );
+    }
+
+    renderImageBag() {
+        return (
+            <img
+                src={GreenBag}
+                alt="green bag logo"
+                /*onClick={this.goBack}*/
+            />
+        );
+    }
+    
+    renderCurrencyLogo() {
+        const { currencyIndex, getCurrencyIndex } = this.props;
+        return (
+            <Query query={CURRENCY_QUERY}>
+                {({ loading, error, data }) => {
+                    if (loading) return <div>Loading...</div>;
+
+                    if (error) return <div>Error: {error.message}</div>;
+
+                    return (
+                        <p id="currency-symbol">
+                            {data.currencies[currencyIndex].symbol}
+                        </p>
+                    );
+                }}
+            </Query>
+        );
+    }
+
+    renderArrow() {
+        const { isArrowActive } = this.state;
+        return (
+            <img
+                src={ArrowDown}
+                alt="more currencies"
+                id={isArrowActive ? 'arrow-up' : 'arrow-down'}
+                onClick={this.arrowClicked}
+            />
+        );
+    }
+
+    renderEmptyCartLogo() {
+        return (
+            <img
+                src={Cart}
+                alt="Cart"
+                id="empty-cart-logo"
+                onClick={this.toggleCart}
+            />
+        );
+    }
     render() {
         const {
-            isAllActive,
-            isClothesActive,
-            isTechActive,
-            isArrowActive,
             currencyChangeAppear,
         } = this.state;
-        const { currencyIndex, getCurrencyIndex } = this.props;
+
+        const { getCurrencyIndex } = this.props;
         return (
             <nav>
                 <div className="main-nav-container">
-                    <div className="category-name">
-                        <ul>
-                            <NavLink to="/" id="all" onClick={this.navClicked}>
-                                <span
-                                    className={
-                                        isAllActive ? 'activeClicked' : ''
-                                    }
-                                >
-                                    All
-                                </span>
-                            </NavLink>
-                            <NavLink
-                                to="clothes"
-                                id="clothes"
-                                onClick={this.navClicked}
-                            >
-                                <span
-                                    className={
-                                        isClothesActive ? 'activeClicked' : ''
-                                    }
-                                >
-                                    Clothes
-                                </span>
-                            </NavLink>
-                            <NavLink
-                                to="tech"
-                                id="tech"
-                                onClick={this.navClicked}
-                            >
-                                <span
-                                    className={
-                                        isTechActive ? 'activeClicked' : ''
-                                    }
-                                >
-                                    Tech
-                                </span>
-                            </NavLink>
-                        </ul>
-                    </div>
-                    <div className="middle-logo">
-                        <img
-                            src={GreenBag}
-                            alt="green bag logo"
-                            /*onClick={this.goBack}*/
-                        />
-                    </div>
+                    <div className="category-name">{this.renderNavLinks()}</div>
+                    <div className="middle-logo">{this.renderImageBag()}</div>
                     <div className="actions">
-                        <Query query={CURRENCY_QUERY}>
-                            {({ loading, error, data }) => {
-                                if (loading) return <div>Loading...</div>;
-
-                                if (error)
-                                    return <div>Error: {error.message}</div>;
-
-                                return (
-                                    <p id="currency-symbol">
-                                        {data.currencies[currencyIndex].symbol}
-                                    </p>
-                                );
-                            }}
-                        </Query>
-                        <img
-                            src={ArrowDown}
-                            alt="more currencies"
-                            id={isArrowActive ? 'arrow-up' : 'arrow-down'}
-                            onClick={this.arrowClicked}
-                        />
-                        <img
-                            src={Cart}
-                            alt="Cart"
-                            id="empty-cart-logo"
-                            onClick={this.toggleCart}
-                        />
+                        {this.renderCurrencyLogo()}
+                        {this.renderArrow()}
+                        {this.renderEmptyCartLogo()}
                     </div>
                 </div>
                 {currencyChangeAppear && (
-                    <CurrencyChange
-                        getCurrencyIndex={getCurrencyIndex}
-                    />
+                    <CurrencyChange getCurrencyIndex={getCurrencyIndex} />
                 )}
             </nav>
         );
