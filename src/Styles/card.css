@@ -26,16 +26,6 @@
     border: 1px solid orangered;
   } */
 
-#green-cart img {
-    /* border: 1px solid orangered; */
-    width: 32px;
-    height: 32px;
-    position: relative;
-    left: 272px;
-    top: -35px;
-    margin-bottom: -35px;
-    cursor: pointer;
-}
 
 #in-stock {
     margin-left: 35.42%;
@@ -56,7 +46,7 @@
 }
 
 .out:hover {
-    box-shadow: rgba(250, 250, 250, 1) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
 }
 
 #product-image {

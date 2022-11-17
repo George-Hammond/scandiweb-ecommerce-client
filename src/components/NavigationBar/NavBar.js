@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import { CURRENCY_QUERY } from '../../graphQLQuery/cardQuery';
 import CurrencyChange from './currencyChange/CurrencyChange';
+import CartDropdown from './cartDropdown/CartDropDown';
 
 class NavBar extends React.PureComponent {
     constructor(props) {
@@ -17,9 +18,12 @@ class NavBar extends React.PureComponent {
             isTechActive: false,
             isArrowActive: false,
             currencyChangeAppear: false,
+            cartAppear: false,
         };
+
         this.navClicked = this.navClicked.bind(this);
         this.arrowClicked = this.arrowClicked.bind(this);
+        this.toggleCart = this.toggleCart.bind(this);
         // this.goBack = this.goBack.bind(this)
     }
 
@@ -73,9 +77,17 @@ class NavBar extends React.PureComponent {
               });
     };
 
+    toggleCart = () => {
+        const { cartAppear } = this.state;
+        !cartAppear
+            ? this.setState({ cartAppear: true })
+            : this.setState({ cartAppear: false });
+    };
+
     // goBack = () => {
     //     window.history.back();
     // };
+
     renderNavLinks() {
         const { isAllActive, isClothesActive, isTechActive } = this.state;
         return (
@@ -108,7 +120,7 @@ class NavBar extends React.PureComponent {
             />
         );
     }
-    
+
     renderCurrencyLogo() {
         const { currencyIndex, getCurrencyIndex } = this.props;
         return (
@@ -151,11 +163,9 @@ class NavBar extends React.PureComponent {
         );
     }
     render() {
-        const {
-            currencyChangeAppear,
-        } = this.state;
+        const { currencyChangeAppear } = this.state;
 
-        const { getCurrencyIndex } = this.props;
+        const { getCurrencyIndex, cartItems, currencyIndex,  } = this.props;
         return (
             <nav>
                 <div className="main-nav-container">
@@ -165,10 +175,26 @@ class NavBar extends React.PureComponent {
                         {this.renderCurrencyLogo()}
                         {this.renderArrow()}
                         {this.renderEmptyCartLogo()}
+                        {cartItems.length > 0 ? (
+                            <p id="number-in-cart">{cartItems.length}</p>
+                        ) : (
+                            ''
+                        )}
                     </div>
                 </div>
                 {currencyChangeAppear && (
                     <CurrencyChange getCurrencyIndex={getCurrencyIndex} />
+                )}
+                {this.state.cartAppear && (
+                    <CartDropdown
+                        toggleCart={this.toggleCart}
+                        cartItems={cartItems}
+                        currencyIndex={currencyIndex}
+                        // sumProductPrice={sumProductPrice}
+                    />
+                )}
+                {this.state.cartAppear && (
+                    <div className="overlay-appear" onClick={this.toggleCart}></div>
                 )}
             </nav>
         );

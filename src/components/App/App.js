@@ -3,9 +3,10 @@ import '../../Styles/App.css';
 import NavBar from '../NavigationBar/NavBar';
 import CategoryName from '../Category/CategoryName/CategoryName';
 import All from '../Category/All/All';
-import { BrowserRouter , Route, Routes  } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Clothes from '../Category/Clothes/Clothes';
 import Tech from '../Category/Tech/Tech';
+import Cart from '../DisplayCart/Cart';
 
 class App extends React.PureComponent {
     constructor(props) {
@@ -13,9 +14,14 @@ class App extends React.PureComponent {
 
         this.state = {
             currencyIndex: 0,
+            cartItems: [],
+            productItemAmount: [],
+            sumProductPrice: 0,
         };
 
         this.getCurrencyIndex = this.getCurrencyIndex.bind(this);
+        this.addToCart = this.addToCart.bind(this);
+        this.getCardId = this.getCardId.bind(this);
     }
 
     // Handle currency change
@@ -52,12 +58,43 @@ class App extends React.PureComponent {
                 });
         }
     }
+    //Handle setting PDP id in Routing.
+    getCardId = (key) => {
+        this.setState({ id: key });
+    };
+
+    //Handles event when green cart logo is clicked
+    addToCart(key, amount) {
+        const { cartItems, productItemAmount } = this.state;
+        const isProductPresent = cartItems.some((item) => item === key);
+        if (!isProductPresent) {
+            this.setState({
+                cartItems: [...cartItems, key],
+            });
+        }
+        this.setState({
+            productItemAmount: [...productItemAmount, amount],
+        });
+
+        // let productSum = productItemAmount
+        //     .reduce((prevValue, currValue) => prevValue + currValue, amount)
+        //     .toFixed(2);
+        // console.log(`the sum is: ${productSum}`);
+        // let calculateTax = productSum * 0.21;
+        // console.log(`the tax is: ${calculateTax.toFixed(2)}`);
+        // this.setState({
+        //     sumProductPrice: productSum,
+        //     //this calculates the tax on the product
+        //     tax: calculateTax,
+        // });
+    }
     render() {
         return (
             <BrowserRouter>
                 <NavBar
                     currencyIndex={this.state.currencyIndex}
                     getCurrencyIndex={this.getCurrencyIndex}
+                    cartItems={this.state.cartItems}
                 />
                 <Routes>
                     <Route
@@ -93,7 +130,7 @@ class App extends React.PureComponent {
                         }
                     />
 
-                    {/* <Route
+                    <Route
                         path="/cart"
                         element={
                             <Cart
@@ -105,7 +142,7 @@ class App extends React.PureComponent {
                             />
                         }
                     />
-
+                    {/*
                     <Route
                         path="/product/:productId"
                         element={

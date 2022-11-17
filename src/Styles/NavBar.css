@@ -5,13 +5,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* border: 1px solid red; */
 }
+
 .category-name ul {
     display: flex;
     margin-left: 101px;
     margin-top: 24px;
-    /* border: 1px solid blue; */
     justify-content: space-between;
     align-items: flex-start;
     width: 234px;
@@ -30,7 +29,6 @@
 .category-name ul > a {
     color: #1d1f22;
     text-decoration: none;
-    /* border-bottom: 2px solid #5ECE7B; */
     height: 56px;
     font-style: normal;
     font-weight: 400;
@@ -62,14 +60,12 @@
     align-items: center;
     width: 204px;
     height: 40px;
-    /* border: 1px solid purple; */
 }
 
 .middle-logo > img {
     cursor: pointer;
 }
 #number-in-cart {
-    /* border: 1px solid lightblue; */
     border-radius: 12px;
     width: 15px;
     height: 16px;
@@ -99,13 +95,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 1px dotted #5ECE7B; */
 }
 
 .actions > p {
     width: 32px;
     height: 29px;
-    /* border: 1px dotted #1D1F22; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,4 +114,24 @@
     margin-right: 22px;
     transform: rotate(180deg);
     cursor: pointer;
+}
+
+#number-in-cart {
+    border-radius: 12px;
+    width: 14.29px;
+    height: 14.29px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #1d1f22;
+    color: #eee;
+    margin-left: -8px;
+    margin-top: -15px;
 }
