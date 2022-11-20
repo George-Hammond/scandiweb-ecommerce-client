@@ -121,7 +121,7 @@ class NavBar extends React.PureComponent {
     }
 
     renderCurrencyLogo() {
-        const { currencyIndex, getCurrencyIndex } = this.props;
+        const { currencyIndex } = this.props;
         return (
             <Query query={CURRENCY_QUERY}>
                 {({ loading, error, data }) => {
@@ -130,7 +130,7 @@ class NavBar extends React.PureComponent {
                     if (error) return <div>Error: {error.message}</div>;
 
                     return (
-                        <p id="currency-symbol">
+                        <p id="currency-symbol" onClick={this.arrowClicked}>
                             {data.currencies[currencyIndex].symbol}
                         </p>
                     );

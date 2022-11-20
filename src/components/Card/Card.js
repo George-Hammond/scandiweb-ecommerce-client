@@ -46,15 +46,15 @@ class Card extends React.PureComponent {
                         />
                     </Link>
                     {isCardHovered ? (
-                    <GreenCart
-                        key={cardData.id}
-                        addToCart={() =>
-                            addToCart(
-                                cardData.id,
-                                cardData.prices[currencyIndex].amount
-                            )
-                        }
-                    />
+                        <GreenCart
+                            key={cardData.id}
+                            addToCart={() =>
+                                addToCart(
+                                    cardData.id,
+                                    cardData.prices[currencyIndex].amount
+                                )
+                            }
+                        />
                     ) : (
                         ''
                     )}
@@ -69,17 +69,19 @@ class Card extends React.PureComponent {
     }
 
     renderCardOutStock() {
-        const { addToCart, getCardId, cardData, currencyIndex } = this.props;
+        const { getCardId, cardData, currencyIndex } = this.props;
         const { isCardHovered } = this.state;
         return (
             <div className="card-wrapper out">
                 <div className="card-img-section c-out">
-                    <img
-                        src={cardData.gallery[0]}
-                        alt={cardData.name}
-                        id="product-image"
-                    />
-
+                    <Link to={`/product/${cardData.id}`}>
+                        <img
+                            src={cardData.gallery[0]}
+                            alt={cardData.name}
+                            onClick={getCardId}
+                            id="product-image"
+                        />
+                    </Link>
                     {isCardHovered ? <GreenCart key={cardData.id} /> : ''}
                 </div>
                 <p id="product-name">{cardData.name}</p>
@@ -87,7 +89,11 @@ class Card extends React.PureComponent {
                     {cardData.prices[currencyIndex].currency.symbol}
                     {cardData.prices[currencyIndex].amount}
                 </p>
-                {!cardData.inStock && <p id="in-stock">Out of Stock</p>}
+                {!cardData.inStock && (
+                    <p id="in-stock" >
+                        Out of Stock
+                    </p>
+                )}
                 <p id="oos-overlay"></p>
             </div>
         );

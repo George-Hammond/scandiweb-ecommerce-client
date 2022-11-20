@@ -1,0 +1,12 @@
+.different-product {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 595px;
+}
+
+.different-product img {
+    width: 79px;
+    height: 80px;
+    margin-bottom: 40px;
+}

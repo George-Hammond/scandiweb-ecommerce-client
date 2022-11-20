@@ -1,12 +1,12 @@
 import React from 'react';
 import '../../Styles/App.css';
 import NavBar from '../NavigationBar/NavBar';
-import CategoryName from '../Category/CategoryName/CategoryName';
 import All from '../Category/All/All';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Clothes from '../Category/Clothes/Clothes';
 import Tech from '../Category/Tech/Tech';
 import Cart from '../DisplayCart/Cart';
+import ProductPage from '../pdp/ProductPage';
 
 class App extends React.PureComponent {
     constructor(props) {
@@ -142,7 +142,7 @@ class App extends React.PureComponent {
                             />
                         }
                     />
-                    {/*
+
                     <Route
                         path="/product/:productId"
                         element={
@@ -152,7 +152,7 @@ class App extends React.PureComponent {
                                 currencyIndex={this.state.currencyIndex}
                             />
                         }
-                    /> */}
+                    />
                 </Routes>
             </BrowserRouter>
         );

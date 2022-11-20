@@ -45,6 +45,9 @@
     box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
 }
 
+.out{
+    z-index: 2;
+}
 .out:hover {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
 }
@@ -104,5 +107,6 @@
     opacity: 0.5;
     height: 412px;
     width: 354px;
-    z-index: 1;
+    /* z-index: 1; */
+    cursor: pointer;
 }

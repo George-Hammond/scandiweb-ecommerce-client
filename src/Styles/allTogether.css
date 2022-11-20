@@ -1,0 +1,13 @@
+.alltogether {
+    display: flex;
+    justify-content: space-between;
+    margin: 80px auto 80px 100px;
+    width: 1121px;
+}
+
+.LD-combined {
+    width: 1002px;
+    height: 595px;
+    display: flex;
+    justify-content: space-between;
+}
