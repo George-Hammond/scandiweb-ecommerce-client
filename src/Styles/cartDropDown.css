@@ -1,4 +1,8 @@
 /* DropDown Cart Section */
+.cart-dropdown-attribute-alltogether{
+    width: 164;
+    display: flex;
+}
 .cart-dropdown-wrapper {
     z-index: 100;
     display: flex;
@@ -118,11 +122,15 @@
 
 .cart-dropdown-product-quantity {
     display: flex;
-    justify-content: space-between;
-    width: 153px;
+    justify-content: flex-end;
+    width: 164px;
 }
 
-.cart-dropdown-product-quantity .dropdown-toggle-add {
+.cart-dropDown-attribute-name {
+    width: 136px;
+}
+
+.dropdown-toggle-add {
     height: 190px;
 }
 
@@ -154,7 +162,11 @@
 
 .cart-dropdown-attribute {
     width: 136px;
+    /* display: flex; */
+    height: 190px;
 }
+
+
 
 .cart-dropdown-attribute h2 {
     font-family: 'Raleway';
@@ -175,18 +187,17 @@
     line-height: 160%;
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
     color: #1d1f22;
+    margin-bottom: 4px;
 }
 
-.cart-attributes-price-section p {
+.cartDD-attributes-price-section p {
+    height: 26px;
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 160%;
-    text-align: right;
-    margin-bottom: 8px;
     color: #1d1f22;
 }
 
@@ -267,12 +278,27 @@
 .drop-down-amount {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
 }
 
-.drop-down-amount p {
+#drop-down-total-amount {
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 160%;
+    display: flex;
+    align-items: center;
+    text-align: right;
+}
+
+#drop-down-total {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 18px;
+    color: #1d1f22;
+    width: 55px;
+    height: 19px;
 }

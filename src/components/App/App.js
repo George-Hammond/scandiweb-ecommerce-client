@@ -154,18 +154,6 @@ class App extends React.PureComponent {
                         }
                     /> */}
                 </Routes>
-                {/* <All
-                    currencyIndex={this.state.currencyIndex}
-                    getCurrencyIndex={this.getCurrencyIndex}
-                /> */}
-                {/* <Clothes
-                    currencyIndex={this.state.currencyIndex}
-                    getCurrencyIndex={this.getCurrencyIndex}
-                /> */}
-                {/* <Tech
-                    currencyIndex={this.state.currencyIndex}
-                    getCurrencyIndex={this.getCurrencyIndex}
-                /> */}
             </BrowserRouter>
         );
     }

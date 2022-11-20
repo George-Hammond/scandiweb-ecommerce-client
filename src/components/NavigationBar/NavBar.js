@@ -29,7 +29,6 @@ class NavBar extends React.PureComponent {
 
     navClicked = (event) => {
         const idTag = event.currentTarget;
-        console.log(this.state);
         switch (idTag.id) {
             case 'all':
                 this.setState({

@@ -7,7 +7,7 @@ import '../../../Styles/cartDropDown.css';
 
 class CartDropdown extends React.PureComponent {
     render() {
-        const { toggleCart, cartItems, currencyIndex, /*sumProductPrice*/ } =
+        const { toggleCart, cartItems, currencyIndex /*sumProductPrice*/ } =
             this.props;
         const listItems = cartItems.map((cartItem) => (
             <Query
@@ -17,7 +17,7 @@ class CartDropdown extends React.PureComponent {
                 {({ loading, error, data }) => {
                     if (loading) return '';
                     if (error) return `Error: ${error.message}`;
-                    
+
                     return (
                         <CartDropdownItems
                             key="0"
@@ -33,7 +33,7 @@ class CartDropdown extends React.PureComponent {
             return <>{listItems}</>;
         };
         return cartItems.length > 0 ? (
-            <div className="cart-dropdown-wrapper" onMouseLeave={toggleCart}>
+            <div className="cart-dropdown-wrapper" >
                 <p id="drop-title">
                     My Bag,
                     {cartItems.length > 0 && (
@@ -46,7 +46,7 @@ class CartDropdown extends React.PureComponent {
                 {displayCartItem()}
                 <div className="drop-down-amount">
                     <p id="drop-down-total">Total</p>
-                    <p id="drop-down-total-amount">${sumProductPrice}</p>
+                    <p id="drop-down-total-amount">${/*sumProductPrice*/50}</p>
                 </div>
                 <div className="cart-dropdown-btn">
                     <Link to="cart">
@@ -56,7 +56,7 @@ class CartDropdown extends React.PureComponent {
                 </div>
             </div>
         ) : (
-            <div className="cart-dropdown-wrapper" >
+            <div className="cart-dropdown-wrapper">
                 <p id="drop-title-empty">Cart is Empty.</p>
             </div>
         );
