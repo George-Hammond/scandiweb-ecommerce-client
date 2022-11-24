@@ -34,7 +34,6 @@ class Clothes extends React.PureComponent {
                         if (loading) return <div>Loading...</div>;
 
                         if (error) return <div>Error: {error.message}</div>;
-                        console.log(data.category.products);
                         return data.category.products.map((cardData, index) => (
                             <Card
                                 key={cardData.id}

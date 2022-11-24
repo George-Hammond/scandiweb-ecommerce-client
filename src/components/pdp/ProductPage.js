@@ -4,6 +4,21 @@ import { Query } from 'react-apollo';
 import { PRODUCT_SELECTION } from '../../graphQLQuery/cardQuery';
 
 class ProductPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            galleryIndex: 0,
+        };
+
+        this.grabKey = this.grabKey.bind(this)
+    }
+
+    grabKey = (event) => {
+        const gallIndex = event.target.__reactFiber$jp4nnak4bng.key
+        this.setState({
+            galleryIndex: gallIndex
+        })
+    }
     render() {
         const { id, addToCart, currencyIndex } = this.props;
         return (
@@ -27,6 +42,8 @@ class ProductPage extends React.Component {
                                     );
                                 }}
                                 currencyIndex={currencyIndex}
+                                galleryIndex={this.state.galleryIndex}
+                                grabKey={this.grabKey}
                             />
                         );
                     }}

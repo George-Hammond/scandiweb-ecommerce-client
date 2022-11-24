@@ -38,6 +38,7 @@ const PRODUCT_SELECTION = gql`
         product(id: $productId) {
             name
             description
+            inStock
             attributes {
                 id
                 name

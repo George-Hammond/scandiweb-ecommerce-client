@@ -139,8 +139,25 @@ class Description extends React.PureComponent {
                 return '';
         }
     }
+
+    renderButtonInStock() {
+        const { addToCart } = this.props;
+        return (
+            <div className="add-to-cart">
+                <button onClick={addToCart}>Add to cart</button>
+            </div>
+        );
+    }
+
+    renderButtonOutStock() {
+        return (
+            <div className="outStock">
+                <button>Add to cart</button>
+            </div>
+        );
+    }
     render() {
-        const { productData, addToCart, currencyIndex } = this.props;
+        const { productData, currencyIndex } = this.props;
 
         this.renderDisplayDescription();
 
@@ -159,9 +176,9 @@ class Description extends React.PureComponent {
                         {productData.product.prices[currencyIndex].amount}
                     </p>
                 </div>
-                <div className="add-to-cart">
-                    <button onClick={addToCart}>Add to cart</button>
-                </div>
+                {!productData.product.inStock
+                    ? this.renderButtonOutStock()
+                    : this.renderButtonInStock()}
                 <div
                     className="description"
                     dangerouslySetInnerHTML={{

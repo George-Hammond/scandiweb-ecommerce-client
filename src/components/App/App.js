@@ -76,17 +76,15 @@ class App extends React.PureComponent {
             productItemAmount: [...productItemAmount, amount],
         });
 
-        // let productSum = productItemAmount
-        //     .reduce((prevValue, currValue) => prevValue + currValue, amount)
-        //     .toFixed(2);
-        // console.log(`the sum is: ${productSum}`);
-        // let calculateTax = productSum * 0.21;
-        // console.log(`the tax is: ${calculateTax.toFixed(2)}`);
-        // this.setState({
-        //     sumProductPrice: productSum,
-        //     //this calculates the tax on the product
-        //     tax: calculateTax,
-        // });
+        let productSum = productItemAmount
+            .reduce((prevValue, currValue) => prevValue + currValue, amount)
+            .toFixed(2);
+        let calculateTax = productSum * 0.21;
+        let rounded = calculateTax.toFixed(2);
+        this.setState({
+            sumProductPrice: productSum,
+            tax: rounded,
+        });
     }
     render() {
         return (
@@ -95,6 +93,7 @@ class App extends React.PureComponent {
                     currencyIndex={this.state.currencyIndex}
                     getCurrencyIndex={this.getCurrencyIndex}
                     cartItems={this.state.cartItems}
+                    sumProductPrice={this.state.sumProductPrice}
                 />
                 <Routes>
                     <Route

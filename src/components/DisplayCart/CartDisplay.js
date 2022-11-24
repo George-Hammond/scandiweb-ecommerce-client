@@ -2,6 +2,34 @@ import React from 'react';
 import '../../Styles/cartDisplay.css';
 
 class CartDisplay extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            imageIndex: 0,
+        };
+
+        this.changeImageOnLeft = this.changeImageOnLeft.bind(this);
+        this.changeImageOnRight = this.changeImageOnRight.bind(this);
+    }
+
+    changeImageOnLeft() {
+        const { imageIndex } = this.state;
+        if (imageIndex < 1) {
+            this.setState({
+                imageIndex: 0,
+            });
+        } else {
+            this.setState((prevImageIndex) => ({
+                imageIndex: prevImageIndex.imageIndex - 1,
+            }));
+        }
+    }
+
+    changeImageOnRight() {
+        this.setState((prevImageIndex) => ({
+            imageIndex: prevImageIndex.imageIndex + 1,
+        }));
+    }
     renderAttributeAbove2() {
         const { cartData } = this.props;
         return (
@@ -174,6 +202,7 @@ class CartDisplay extends React.PureComponent {
 
     render() {
         const { cartData, currencyIndex } = this.props;
+        const { imageIndex } = this.state;
         this.renderDisplayDescription();
 
         //Return
@@ -204,12 +233,22 @@ class CartDisplay extends React.PureComponent {
                     <div className="cart-attributes-product-quantity">
                         <div className="cart-attributes-product-quantity-image">
                             <img
-                                src={cartData.gallery[0]}
+                                src={cartData.gallery[imageIndex]}
                                 alt={cartData.name}
                             />
                             <div className="toggle-img">
-                                <button id="lesser">&gt;</button>
-                                <button id="greater">&lt;</button>
+                                <button
+                                    id="lesser"
+                                    onClick={this.changeImageOnLeft}
+                                >
+                                    &gt;
+                                </button>
+                                <button
+                                    id="greater"
+                                    onClick={this.changeImageOnRight}
+                                >
+                                    &lt;
+                                </button>
                             </div>
                         </div>
                     </div>

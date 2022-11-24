@@ -6,4 +6,5 @@
 .large-product img {
     width: 610px;
     height: 511px;
+    object-fit: contain;
 }

@@ -2,12 +2,34 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import CartDropdownItems from './cartDropdownItems';
-import { CART_PRODUCT_QUERY } from '../../../graphQLQuery/cardQuery';
+import {
+    CART_PRODUCT_QUERY,
+    CURRENCY_QUERY,
+} from '../../../graphQLQuery/cardQuery';
 import '../../../Styles/cartDropDown.css';
 
 class CartDropdown extends React.PureComponent {
+    renderCurrencyLogo() {
+        const { currencyIndex, sumProductPrice } = this.props;
+        return (
+            <Query query={CURRENCY_QUERY}>
+                {({ loading, error, data }) => {
+                    if (loading) return <div>Loading...</div>;
+
+                    if (error) return <div>Error: {error.message}</div>;
+
+                    return (
+                        <p id="drop-down-total-amount">
+                            {data.currencies[currencyIndex].symbol}
+                            {sumProductPrice}
+                        </p>
+                    );
+                }}
+            </Query>
+        );
+    }
     render() {
-        const { toggleCart, cartItems, currencyIndex /*sumProductPrice*/ } =
+        const { toggleCart, cartItems, currencyIndex, sumProductPrice } =
             this.props;
         const listItems = cartItems.map((cartItem) => (
             <Query
@@ -33,7 +55,7 @@ class CartDropdown extends React.PureComponent {
             return <>{listItems}</>;
         };
         return cartItems.length > 0 ? (
-            <div className="cart-dropdown-wrapper" >
+            <div className="cart-dropdown-wrapper">
                 <p id="drop-title">
                     My Bag,
                     {cartItems.length > 0 && (
@@ -46,7 +68,7 @@ class CartDropdown extends React.PureComponent {
                 {displayCartItem()}
                 <div className="drop-down-amount">
                     <p id="drop-down-total">Total</p>
-                    <p id="drop-down-total-amount">${/*sumProductPrice*/50}</p>
+                    {this.renderCurrencyLogo()}
                 </div>
                 <div className="cart-dropdown-btn">
                     <Link to="cart">
@@ -64,3 +86,16 @@ class CartDropdown extends React.PureComponent {
 }
 
 export default CartDropdown;
+
+{
+    /* <p id="drop-down-total-amount"> */
+}
+{
+    /* $ */
+}
+{
+    /*sumProductPrice*/
+}
+{
+    /* </p>; */
+}

@@ -164,7 +164,8 @@ class NavBar extends React.PureComponent {
     render() {
         const { currencyChangeAppear } = this.state;
 
-        const { getCurrencyIndex, cartItems, currencyIndex,  } = this.props;
+        const { getCurrencyIndex, cartItems, currencyIndex, sumProductPrice } =
+            this.props;
         return (
             <nav>
                 <div className="main-nav-container">
@@ -189,11 +190,14 @@ class NavBar extends React.PureComponent {
                         toggleCart={this.toggleCart}
                         cartItems={cartItems}
                         currencyIndex={currencyIndex}
-                        // sumProductPrice={sumProductPrice}
+                        sumProductPrice={sumProductPrice}
                     />
                 )}
                 {this.state.cartAppear && (
-                    <div className="overlay-appear" onClick={this.toggleCart}></div>
+                    <div
+                        className="overlay-appear"
+                        onClick={this.toggleCart}
+                    ></div>
                 )}
             </nav>
         );

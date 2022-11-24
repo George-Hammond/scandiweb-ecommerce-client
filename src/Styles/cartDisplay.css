@@ -208,6 +208,7 @@
 .cart-attributes-product-quantity-image img {
     width: 200px;
     height: 288px;
+    object-fit: contain;
 }
 
 #h-rule {

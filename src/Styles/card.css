@@ -1,10 +1,9 @@
 .card-wrapper {
-    /* border: 1px solid red;     */
-    /* background-color:green; */
     width: 386px;
     height: 444px;
     margin-bottom: 103px;
     margin-right: 40px;
+    transition: 0.5s ease;
 }
 
 .category-cardWrapper {
@@ -12,7 +11,6 @@
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    /* border: 1px solid red; */
     width: 1280px;
 }
 
@@ -21,10 +19,6 @@
     width: 355px;
     margin: 16px 16px 24px 16px;
 }
-
-/*#green-cart{
-    border: 1px solid orangered;
-  } */
 
 
 #in-stock {
@@ -45,17 +39,22 @@
     box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
 }
 
-.out{
+.out {
     z-index: 2;
+    transition: 0.5s ease;
+    background-color: #fff;
+    opacity: 0.5;
+    cursor: pointer;
 }
+
 .out:hover {
     box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
 }
 
 #product-image {
-    /* border: 1px solid blue; */
     width: 354px;
     height: 330px;
+    object-fit: contain;
 }
 
 .out > #product-image {
@@ -95,18 +94,4 @@
 
 .out > #product-price {
     color: #8d8f9a;
-}
-
-/* out of stock(oos) overlay */
-#oos-overlay {
-    position: absolute;
-    transition: 0.5s ease;
-    margin-top: -193px;
-    background-color: #fff;
-    margin-left: 16px;
-    opacity: 0.5;
-    height: 412px;
-    width: 354px;
-    /* z-index: 1; */
-    cursor: pointer;
 }

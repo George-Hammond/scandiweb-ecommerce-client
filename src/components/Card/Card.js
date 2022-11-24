@@ -94,7 +94,6 @@ class Card extends React.PureComponent {
                         Out of Stock
                     </p>
                 )}
-                <p id="oos-overlay"></p>
             </div>
         );
     }
