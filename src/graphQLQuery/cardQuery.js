@@ -74,6 +74,7 @@ const CART_PRODUCT_QUERY = gql`
         product(id: $productId) {
             name
             brand
+            id
             prices {
                 currency {
                     symbol

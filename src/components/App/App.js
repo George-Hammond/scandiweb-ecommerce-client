@@ -17,11 +17,15 @@ class App extends React.PureComponent {
             cartItems: [],
             productItemAmount: [],
             sumProductPrice: 0,
+            id: localStorage.getItem('key'),
+            setProductQuantity: 1,
         };
 
         this.getCurrencyIndex = this.getCurrencyIndex.bind(this);
         this.addToCart = this.addToCart.bind(this);
         this.getCardId = this.getCardId.bind(this);
+        this.increaseProduct = this.increaseProduct.bind(this);
+        this.decreaseProduct = this.decreaseProduct.bind(this);
     }
 
     // Handle currency change
@@ -58,9 +62,12 @@ class App extends React.PureComponent {
                 });
         }
     }
+
     //Handle setting PDP id in Routing.
     getCardId = (key) => {
-        this.setState({ id: key });
+        localStorage.setItem('key', key);
+        const storageKey = localStorage.getItem('key');
+        this.setState({ id: storageKey });
     };
 
     //Handles event when green cart logo is clicked
@@ -86,6 +93,26 @@ class App extends React.PureComponent {
             tax: rounded,
         });
     }
+
+    // Handles quantity increase
+    increaseProduct() {
+        const { setProductQuantity } = this.state;
+        this.setState({
+            setProductQuantity: setProductQuantity + 1,
+        });
+    }
+    // Handles quantity decrease
+    decreaseProduct() {
+        const { setProductQuantity } = this.state;
+        setProductQuantity > 1
+            ? this.setState({
+                  setProductQuantity: setProductQuantity - 1,
+              })
+            : this.setState({
+                  setProductQuantity: 1,
+              });
+    }
+
     render() {
         return (
             <BrowserRouter>
@@ -94,6 +121,9 @@ class App extends React.PureComponent {
                     getCurrencyIndex={this.getCurrencyIndex}
                     cartItems={this.state.cartItems}
                     sumProductPrice={this.state.sumProductPrice}
+                    increaseProduct={this.increaseProduct}
+                    decreaseProduct={this.decreaseProduct}
+                    setProductQuantity={this.state.setProductQuantity}
                 />
                 <Routes>
                     <Route

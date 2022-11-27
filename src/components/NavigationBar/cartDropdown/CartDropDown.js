@@ -12,7 +12,7 @@ class CartDropdown extends React.PureComponent {
     renderCurrencyLogo() {
         const { currencyIndex, sumProductPrice } = this.props;
         return (
-            <Query query={CURRENCY_QUERY}>
+            <Query query={CURRENCY_QUERY} key={currencyIndex}>
                 {({ loading, error, data }) => {
                     if (loading) return <div>Loading...</div>;
 
@@ -29,12 +29,18 @@ class CartDropdown extends React.PureComponent {
         );
     }
     render() {
-        const { toggleCart, cartItems, currencyIndex, sumProductPrice } =
-            this.props;
-        const listItems = cartItems.map((cartItem) => (
+        const {
+            cartItems,
+            currencyIndex,
+            increaseProduct,
+            decreaseProduct,
+            setProductQuantity,
+        } = this.props;
+        const listItems = cartItems.map((cartItem, index) => (
             <Query
                 query={CART_PRODUCT_QUERY}
                 variables={{ productId: `${cartItem}` }}
+                key={index}
             >
                 {({ loading, error, data }) => {
                     if (loading) return '';
@@ -46,6 +52,9 @@ class CartDropdown extends React.PureComponent {
                             cartItems={cartItems}
                             cartData={data.product}
                             currencyIndex={currencyIndex}
+                            increaseProduct={increaseProduct}
+                            decreaseProduct={decreaseProduct}
+                            setProductQuantity={setProductQuantity}
                         />
                     );
                 }}
@@ -87,15 +96,3 @@ class CartDropdown extends React.PureComponent {
 
 export default CartDropdown;
 
-{
-    /* <p id="drop-down-total-amount"> */
-}
-{
-    /* $ */
-}
-{
-    /*sumProductPrice*/
-}
-{
-    /* </p>; */
-}

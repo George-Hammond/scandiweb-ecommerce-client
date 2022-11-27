@@ -1,6 +1,6 @@
 /* DropDown Cart Section */
 .cart-dropdown-attribute-alltogether{
-    width: 164;
+    width: 164px;
     display: flex;
 }
 .cart-dropdown-wrapper {
@@ -164,7 +164,6 @@
 
 .cart-dropdown-attribute {
     width: 136px;
-    /* display: flex; */
     height: 190px;
 }
 
@@ -209,7 +208,7 @@
 .cart-dropdown-size-category p {
     cursor: pointer;
     border: 1px solid #1d1f22;
-    padding: 6px 4px;
+    /* padding: 6px 4px; */
     margin-right: 4px;
     font-family: 'Source Sans Pro';
     font-style: normal;
@@ -225,6 +224,22 @@
 .cart-dropdown-size-category p:hover {
     color: #fff;
     background-color: #1d1f22;
+}
+
+#atr0-p{
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+#attr1-iphone{
+    padding: 10px;
+}
+
+#attr1-iphone-color{
+    width: 20px;
+    height: 20px;
 }
 .cart-dropdown-capacity-category {
     display: flex;

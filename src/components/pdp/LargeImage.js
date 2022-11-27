@@ -4,7 +4,6 @@ import '../../Styles/largeImage.css';
 class LargeImage extends React.Component {
     render() {
         const { productData, galleryIndex } = this.props;
-
         return (
             <div className="large-product">
                 <img

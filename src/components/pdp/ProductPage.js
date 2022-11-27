@@ -10,15 +10,15 @@ class ProductPage extends React.Component {
             galleryIndex: 0,
         };
 
-        this.grabKey = this.grabKey.bind(this)
+        this.grabKey = this.grabKey.bind(this);
     }
 
-    grabKey = (event) => {
-        const gallIndex = event.target.__reactFiber$jp4nnak4bng.key
+    grabKey = (e) => {
+        const gallIndex = e.target.id;
         this.setState({
-            galleryIndex: gallIndex
-        })
-    }
+            galleryIndex: gallIndex,
+        });
+    };
     render() {
         const { id, addToCart, currencyIndex } = this.props;
         return (

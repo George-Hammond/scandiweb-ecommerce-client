@@ -1,5 +1,7 @@
 import React from 'react';
 import '../../Styles/cartDisplay.css';
+import { CART_PRODUCT_QUERY } from '../../graphQLQuery/cardQuery';
+import { Query } from 'react-apollo';
 
 class CartDisplay extends React.PureComponent {
     constructor(props) {
@@ -26,14 +28,24 @@ class CartDisplay extends React.PureComponent {
     }
 
     changeImageOnRight() {
-        this.setState((prevImageIndex) => ({
-            imageIndex: prevImageIndex.imageIndex + 1,
-        }));
-    }
-    renderAttributeAbove2() {
         const { cartData } = this.props;
+        const { imageIndex } = this.state;
+
+        if (imageIndex < cartData.gallery.length - 1) {
+            this.setState((prevImageIndex) => ({
+                imageIndex: prevImageIndex.imageIndex + 1,
+            }));
+        } else {
+            this.setState({
+                imageIndex: cartData.gallery.length - 1,
+            });
+        }
+    }
+    renderAttributeA2() {
+        const { cartData } = this.props;
+
         return (
-            <>
+            <div>
                 <div className="cart-attributes-size-section greaterTwo">
                     <h3>{cartData.attributes[0].name}</h3>
                     <div className="cart-attributes-size-category">
@@ -62,7 +74,7 @@ class CartDisplay extends React.PureComponent {
                         })}
                     </div>
                 </div>
-            </>
+            </div>
         );
     }
 
@@ -79,40 +91,9 @@ class CartDisplay extends React.PureComponent {
                     </div>
                 </div>
                 <div className="cart-attributes-color-section">
-                    <h3>Color:</h3>
+                    <h3>{cartData.attributes[1].name}</h3>
                     <div className="cart-attributes-colors">
                         {cartData.attributes[1].items.map((item, index) => {
-                            return (
-                                <p
-                                    key={item.id}
-                                    style={{
-                                        backgroundColor: item.displayValue,
-                                    }}
-                                ></p>
-                            );
-                        })}
-                    </div>
-                </div>
-            </>
-        );
-    }
-
-    renderAttributeNikeAir() {
-        const { cartData } = this.props;
-        return (
-            <>
-                <div className="cart-attributes-size-section">
-                    <h3>{cartData.attributes}</h3>
-                    <div className="cart-attributes-size-category">
-                        {cartData.attributes[1].items.map((item) => {
-                            return <p key={item.id}>{item.displayValue}</p>;
-                        })}
-                    </div>
-                </div>
-                <div className="cart-attributes-color-section">
-                    <h3>Color:</h3>
-                    <div className="cart-attributes-colors">
-                        {cartData.attributes[0].items.map((item, index) => {
                             return (
                                 <p
                                     key={item.id}
@@ -133,7 +114,7 @@ class CartDisplay extends React.PureComponent {
         return (
             <>
                 <div className="cart-attributes-size-section">
-                    <h3>{cartData.attributes}</h3>
+                    <h3>{console.log(cartData.attributes[1].name)}</h3>
                     <div className="cart-attributes-size-category">
                         {cartData.attributes[1].items.map((item) => {
                             return <p key={item.id}>{item.displayValue}</p>;
@@ -173,37 +154,93 @@ class CartDisplay extends React.PureComponent {
         );
     }
 
+    renderNike() {
+        return (
+            <Query
+                query={CART_PRODUCT_QUERY}
+                variables={{ productId: `huarache-x-stussy-le` }}
+            >
+                {({ loading, error, data }) => {
+                    if (loading) return '';
+                    if (error) return `Error: ${error.message}`;
+
+                    return (
+                        <div className="cart-attributes-size-section">
+                            <h3>{data.product.attributes[0].name}</h3>
+                            <div className="cart-attributes-size-category">
+                                {data.product.attributes[0].items.map(
+                                    (item) => {
+                                        return (
+                                            <p key={item.id}>{item.value}</p>
+                                        );
+                                    }
+                                )}
+                            </div>
+                        </div>
+                    );
+                }}
+            </Query>
+        );
+    }
+
+    renderJacket() {
+        return (
+            <Query
+                query={CART_PRODUCT_QUERY}
+                variables={{ productId: `jacket-canada-goosee` }}
+            >
+                {({ loading, error, data }) => {
+                    if (loading) return '';
+                    if (error) return `Error: ${error.message}`;
+
+                    return (
+                        <div className="cart-attributes-size-section">
+                            <h3>{data.product.attributes[0].name}</h3>
+                            <div className="cart-attributes-size-category">
+                                {data.product.attributes[0].items.map(
+                                    (item) => {
+                                        return (
+                                            <p key={item.id}>{item.value}</p>
+                                        );
+                                    }
+                                )}
+                            </div>
+                        </div>
+                    );
+                }}
+            </Query>
+        );
+    }
+
     renderDisplayDescription() {
         const { cartData } = this.props;
-        const attributes = cartData.attributes.length;
-        switch (attributes) {
-            case attributes > 2:
-                this.renderAttributeAbove2();
-                break;
-            case attributes > 1:
-                switch (cartData) {
-                    case cartData.name === 'iphone 12 pro':
-                        this.renderAttributeIphone12();
-                        break;
-                    case cartData.name === 'Nike Air Huarache Le':
-                        this.renderAttributeNikeAir();
-                        break;
-                    default:
-                        this.renderAttributeOf1();
-                }
-                break;
-            case attributes > 0:
-                this.renderAttribute0();
-                break;
-            default:
-                return '';
+        const attributesData = cartData.attributes.length;
+
+        if (attributesData > 2) {
+            return this.renderAttributeA2();
+        } else if (attributesData > 1) {
+            if (cartData.id === 'apple-iphone-12-pro') {
+                return this.renderAttributeIphone12();
+            } else {
+                return this.renderAttributeOf1();
+            }
+        } else if (attributesData > 0) {
+            console.log(cartData)
+            if (cartData.id === 'huarache-x-stussy-le') {
+                return this.renderNike();
+            } else if (cartData.id === 'jacket-canada-goosee') {
+                return this.renderJacket()
+            }
+            return this.renderAttribute0();
+        } else {
+            return '';
         }
     }
 
     render() {
         const { cartData, currencyIndex } = this.props;
         const { imageIndex } = this.state;
-        this.renderDisplayDescription();
+        // this.renderDisplayDescription();
 
         //Return
         return (

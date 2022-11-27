@@ -21,6 +21,7 @@ class Cart extends React.PureComponent {
             <Query
                 query={CART_PRODUCT_QUERY}
                 variables={{ productId: `${cartItem}` }}
+                key={cartItem}
             >
                 {({ loading, error, data }) => {
                     if (loading) return '';
@@ -29,7 +30,7 @@ class Cart extends React.PureComponent {
                     return (
                         <>
                             <CartDisplay
-                                key="0"
+                                key={data.product.name}
                                 cartData={data.product}
                                 currencyIndex={currencyIndex}
                             />

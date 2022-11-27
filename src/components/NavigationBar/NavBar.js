@@ -164,8 +164,15 @@ class NavBar extends React.PureComponent {
     render() {
         const { currencyChangeAppear } = this.state;
 
-        const { getCurrencyIndex, cartItems, currencyIndex, sumProductPrice } =
-            this.props;
+        const {
+            getCurrencyIndex,
+            cartItems,
+            currencyIndex,
+            sumProductPrice,
+            increaseProduct,
+            decreaseProduct,
+            setProductQuantity,
+        } = this.props;
         return (
             <nav>
                 <div className="main-nav-container">
@@ -191,6 +198,9 @@ class NavBar extends React.PureComponent {
                         cartItems={cartItems}
                         currencyIndex={currencyIndex}
                         sumProductPrice={sumProductPrice}
+                        increaseProduct={increaseProduct}
+                        decreaseProduct={decreaseProduct}
+                        setProductQuantity={setProductQuantity}
                     />
                 )}
                 {this.state.cartAppear && (

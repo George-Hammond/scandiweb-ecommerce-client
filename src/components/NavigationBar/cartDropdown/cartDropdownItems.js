@@ -3,6 +3,7 @@ import '../../../Styles/cartDropDown.css';
 
 class CartDropdownItems extends React.PureComponent {
     renderAttributeAbove2() {
+        const { cartData } = this.props;
         return (
             <>
                 <div className="cart-dropdown-capacity-section ">
@@ -14,9 +15,9 @@ class CartDropdownItems extends React.PureComponent {
                     </div>
                 </div>
                 <div className="cart-dropdown-touchId-section">
-                    <h3>{cartData.attributes[2].name} :</h3>
+                    <h3>{cartData.attributes[1].name} :</h3>
                     <div className="cart-dropdown-touchId">
-                        {cartData.attributes[2].items.map((item, index) => {
+                        {cartData.attributes[1].items.map((item, index) => {
                             return <p key={item.id}>{item.displayValue}</p>;
                         })}
                     </div>
@@ -26,13 +27,18 @@ class CartDropdownItems extends React.PureComponent {
     }
     renderAttributeIphone12() {
         const { cartData } = this.props;
+
         return (
             <>
                 <div className="cart-dropdown-size-section">
-                    <h3>{cartData.attributes[0].name} :</h3>
+                    <h3>{cartData.attributes[0].id} :</h3>
                     <div className="cart-dropdown-size-category">
                         {cartData.attributes[0].items.map((item) => {
-                            return <p key={item.id}>{item.displayValue}</p>;
+                            return (
+                                <p key={item.id} id="attr1-iphone">
+                                    {item.displayValue}
+                                </p>
+                            );
                         })}
                     </div>
                 </div>
@@ -46,6 +52,7 @@ class CartDropdownItems extends React.PureComponent {
                                     style={{
                                         backgroundColor: item.displayValue,
                                     }}
+                                    id="attr1-iphone-color"
                                 ></p>
                             );
                         })}
@@ -57,13 +64,18 @@ class CartDropdownItems extends React.PureComponent {
 
     renderAttributeOf1() {
         const { cartData } = this.props;
+
         return (
             <>
                 <div className="cart-dropdown-size-section">
                     <h3>{cartData.attributes[1].name} :</h3>
                     <div className="cart-dropdown-size-category">
                         {cartData.attributes[1].items.map((item) => {
-                            return <p key={item.id}>{item.displayValue}</p>;
+                            return (
+                                <p key={item.id} id="atr1-p">
+                                    {item.displayValue}
+                                </p>
+                            );
                         })}
                     </div>
                 </div>
@@ -93,7 +105,47 @@ class CartDropdownItems extends React.PureComponent {
                 <h3>{cartData.attributes[0].name} :</h3>
                 <div className="cart-dropdown-size-category">
                     {cartData.attributes[0].items.map((item) => {
-                        return <p key={item.id}>{item.value}</p>;
+                        return (
+                            <p key={item.id} id="atr0-p">
+                                {item.value}
+                            </p>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+    }
+
+    renderAttribute0Shoe() {
+        const { cartData } = this.props;
+        return (
+            <div className="cart-dropdown-size-section">
+                <h3>{cartData.attributes[0].name} :</h3>
+                <div className="cart-dropdown-size-category">
+                    {cartData.attributes[0].items.map((item) => {
+                        return (
+                            <p key={item.id} id="atr0-p">
+                                {item.value}
+                            </p>
+                        );
+                    })}
+                </div>
+            </div>
+        );
+    }
+
+    renderAttribute0Jacket() {
+        const { cartData } = this.props;
+        return (
+            <div className="cart-dropdown-size-section">
+                <h3>{cartData.attributes[0].name} :</h3>
+                <div className="cart-dropdown-size-category">
+                    {cartData.attributes[0].items.map((item) => {
+                        return (
+                            <p key={item.id} id="atr0-p">
+                                {item.value}
+                            </p>
+                        );
                     })}
                 </div>
             </div>
@@ -103,29 +155,29 @@ class CartDropdownItems extends React.PureComponent {
     renderDisplayDescription() {
         const { cartData } = this.props;
         const attributesLength = cartData.attributes.length;
-        switch (attributesLength) {
-            case attributesLength > 2:
-                this.renderAttributeAbove2();
-                break;
-            case attributesLength > 1:
-                switch (cartData) {
-                    case cartData.name === 'iphone 12 pro':
-                        this.renderAttributeIphone12();
-                        break;
-                    default:
-                        this.renderAttributeOf1();
-                }
-                break;
-            case attributesLength > 0:
-                this.renderAttribute0();
-                break;
-            default:
-                return '';
+        if (attributesLength > 2) {
+            return this.renderAttributeAbove2();
+        } else if (attributesLength > 1) {
+            if (cartData.id === 'apple-iphone-12-pro') {
+                return this.renderAttributeIphone12();
+            } else {
+                return this.renderAttributeOf1();
+            }
+        } else if (attributesLength > 0) {
+            return this.renderAttribute0();
+        } else {
+            return '';
         }
     }
+
     render() {
-        const { cartData, currencyIndex } = this.props;
-        this.renderDisplayDescription();
+        const {
+            cartData,
+            currencyIndex,
+            increaseProduct,
+            decreaseProduct,
+            setProductQuantity,
+        } = this.props;
 
         return (
             <div className="cart-dropdown">
@@ -144,9 +196,13 @@ class CartDropdownItems extends React.PureComponent {
                         {this.renderDisplayDescription()}
                     </div>
                     <div className="dropdown-toggle-add">
-                        <button id="increase">+</button>
-                        <p>1</p>
-                        <button id="decrease">-</button>
+                        <button id="increase" onClick={increaseProduct}>
+                            +
+                        </button>
+                        <p>{setProductQuantity}</p>
+                        <button id="decrease" onClick={decreaseProduct}>
+                            -
+                        </button>
                     </div>
                 </div>
                 <div className="cart-dropdown-product-quantity">
@@ -160,5 +216,3 @@ class CartDropdownItems extends React.PureComponent {
 }
 
 export default CartDropdownItems;
-
-//

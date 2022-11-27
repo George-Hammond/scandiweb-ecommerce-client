@@ -2,6 +2,9 @@ import React from 'react';
 import '../../Styles/description.css';
 
 class Description extends React.PureComponent {
+    selectAttribute(key) {
+        console.log(key);
+    }
     renderAttributeAbove2() {
         const { productData } = this.props;
 
@@ -19,7 +22,11 @@ class Description extends React.PureComponent {
                     <h3>{productData.product.attributes[1].name}</h3>
                     <div className="size-category">
                         {productData.product.attributes[1].items.map((item) => {
-                            return <p key={item.id}>{item.displayValue}</p>;
+                            return (
+                                <p key={item.id} onClick={() => {this.selectAttribute(item.id)}}>
+                                    {item.displayValue}
+                                </p>
+                            );
                         })}
                     </div>
                 </div>
@@ -74,7 +81,7 @@ class Description extends React.PureComponent {
         return (
             <>
                 <div className="size-section">
-                    <h3>{productData.product.attributes[1].name}</h3>
+                    <h3>{productData.product.attributes[1].name} :</h3>
                     <div className="size-category">
                         {productData.product.attributes[1].items.map((item) => {
                             return <p key={item.id}>{item.displayValue}</p>;
@@ -106,7 +113,7 @@ class Description extends React.PureComponent {
         const { productData } = this.props;
         return (
             <div className="size-section">
-                <h3>{productData.product.attributes[0].name}</h3>
+                <h3>{productData.product.attributes[0].name}:</h3>
                 <div className="size-category">
                     {productData.product.attributes[0].items.map((item) => {
                         return <p key={item.id}>{item.value}</p>;
@@ -119,24 +126,19 @@ class Description extends React.PureComponent {
     renderDisplayDescription() {
         const { productData } = this.props;
         const attributes = productData.product.attributes.length;
-        switch (attributes) {
-            case attributes > 2:
-                this.renderAttributeAbove2();
-                break;
-            case attributes > 1:
-                switch (productData) {
-                    case productData.name === 'iphone 12 pro':
-                        this.renderAttributeIphone12();
-                        break;
-                    default:
-                        this.renderAttributeOf1();
-                }
-                break;
-            case attributes > 0:
-                this.renderAttribute0();
-                break;
-            default:
-                return '';
+
+        if (attributes > 2) {
+            return this.renderAttributeAbove2();
+        } else if (attributes > 1) {
+            if (productData.product.id === 'apple-iphone-12-pro') {
+                return this.renderAttributeIphone12();
+            } else {
+                return this.renderAttributeOf1();
+            }
+        } else if (attributes > 0) {
+            return this.renderAttribute0();
+        } else {
+            return '';
         }
     }
 
