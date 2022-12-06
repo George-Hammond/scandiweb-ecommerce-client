@@ -4,8 +4,10 @@ import '../../Styles/greenCart.css';
 
 class GreenCart extends React.PureComponent {
     render() {
+        const { addToCart } = this.props;
+
         return (
-            <div id="green-cart" onClick={this.props.addToCart}>
+            <div id="green-cart" onClick={addToCart}>
                 <img src={GreenCartSvg} id="green-cart" alt="green cart logo" />
             </div>
         );
